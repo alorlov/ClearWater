@@ -211,6 +211,7 @@ drivers.request = {
 		request.setRequestHeader('Content-Type', 'application/json')
 		request.send(JSON.stringify(body));
 
+		console.log('LOAD', path, body);
 		if (request.status === 200) {
 			let res = request.responseText
 			if (res.startsWith('ERROR'))
@@ -249,7 +250,7 @@ drivers.request = {
 		request.open('POST', '/api/savefile', false);
 		request.setRequestHeader('Content-Type', 'application/json')
 		request.send(JSON.stringify(body));
-
+		console.log('SAVE', path, body);
 		if (request.status !== 200) throw ("Cannot on savefile. " + err)
 
 		return null;

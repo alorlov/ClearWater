@@ -41,7 +41,7 @@ var Matrix = function(fileName, gov) {
 		FileSystem.save( fileName, this.gov.space.getConfig("defaultHeader") );
 		data = FileSystem.load(fileName);
 	}
-	this.matrix = data.split("\n");
+	this.matrix = data.split(FileSystem.getDriver().rowsSep);
 
 	// split all rows at the time!
 	for (var i=this.matrix.length; i--; ) {
