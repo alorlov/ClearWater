@@ -1,0 +1,13 @@
+{
+  "name": "cw",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.7.1"
+  }
+}

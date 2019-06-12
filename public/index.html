@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="CSS.css" />
+<style></style>
+<script src="jquery-1.8.3.js"></script>
+<script src="js/bundle.js"></script>
+<script>
+// request.post('http://localhost:5000/submit', {form: {key: 'val'}}, function (error, response, body) {
+// 	console.error('error:', error); // Print the error if one occurred
+// 	console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+// 	console.log('body:', body); // Print the HTML for the Google homepage.
+// });
+// async function hello() {
+// 	let timing = new Promise((resolve, reject) => {
+// 		setTimeout(() => {
+// 			resolve('first')
+// 		}, 500)
+// 	})
+//
+// 	let result = await timing
+// 	console.log(result);
+// }
+// var ares = hello()
+// console.log('second');
+
+</script>
+
+</head>
+<body>
+	<script>time0 = new Date()</script>
+
+	<div id="_govName"> </div>
+	<div id="_mainMenu">
+		<div id="_paletteHead"></div>
+		<!--<div id="fFolder" data-panel="Pfolder"></div>-->
+		<!--<div id="dNewRow">New</div>-->
+	</div>
+
+	<!-- Interface elements -->
+	<div>
+		<!-- lineHeads stick -->
+		<div id=_stick></div>
+		<!-- showBorder stick -->
+		<div id=_showBorder></div>
+		<!-- Cell Editor -->
+		<div id=_editor tabindex="3" data-editor='EE'>
+			<input type=text name=content id=_editorInput value="123">
+			<div class=buttons>
+				<div id=eBG>BG</div>
+				<div id=eColor>Clr</div>
+				<div id=eBold>B</div>
+				<div id=eAlignL>L</div>
+				<div id=eAlignC>C</div>
+				<div id=eAlignR>R</div>
+				<div id=eAlignR2>R2</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Goverments -->
+	<div id="Goverments">
+	</div>
+
+	<div id=_message></div>
+
+	<!-- Files -->
+	<div id="_folder" data-panel="Pfolder">
+
+		<section id="files">
+			<header id=FFolder data-root="file:///D:/Downloads/zxcv/comma">BIT_Test Library_20121022</header>
+		</section>
+	</div>
+
+	<!-- Template Right -->
+	<div id="_tplRight">
+		<section id="_main">
+			<header id=_clientNames></header>
+			<header id=_clientNamesLayer></header>
+			<header id=_rowMenu></header>
+		</section>
+	</div>
+
+	<!-- Template Dictionary -->
+	<div id="_tplDic">
+		<section id="_main">
+			<header></header>
+		</section>
+	</div>
+
+	<!-- Template Palette -->
+	<div id="_palette">
+	</div>
+	<!-- -->
+
+	<div id=_tooltip></div>
+	<script>
+
+	</script>
+
+	<script src="Inherit.js"></script>
+	<script src="Space.js"></script>
+	<script src="Nation.js"></script>
+	<script>
+
+		var FILE_MANUAL = false;
+		var reg = /([^\\]+)[\\]$/;
+		//var res = reg.exec("D:\\Downloads\\zxcv\\comma\\BIT_Test Library_20121022\\BIT Regression Library_v1.6_20121012\\");
+		//console.log(res[1]);
+
+		var regular = /^\${([^\:]+):([^\:]+)}$/;
+		var regular2 = /^\${([^\:]+)}$/;
+
+		var space = new Space();
+	</script>
+
+<script src="Timing.js"></script>
+<script src="Government.js"></script>
+<script src="FileSystem.js"></script>
+<script src="Manager.js"></script>
+<script src="Sections.js"></script>
+<script src="Visio.js"></script>
+<script src="VisioComp.js"></script>
+<script src="Booker.js"></script>
+<script src="Matrix.js"></script>
+<script src="Colors.js"></script>
+<script src="Events.js"></script>
+<script src="Animation.js"></script>
+<script src="CompBase.js"></script>
+<script src="CompScreen.js"></script>
+<script src="CompTetris.js"></script>
+<script src="Window.js"></script>
+<script src="VisioItem.js"></script>
+<script src="Items.js"></script>
+<script src="ItemsRace.js"></script>
+<script src="ItemsCol.js"></script>
+<script src="ItemsItem.js"></script>
+<script src="LibFolder.js"></script>
+<script src="functions.js"></script>
+<script src="Header.js"></script>
+<script src="CompEditor.js"></script>
+<script src="RowDrag.js"></script>
+<script src="BookList.js"></script>
+<script src="PaintTM.js"></script>
+<script src="PaintComp.js"></script>
+<script src="Frame.js"></script>
+<script src="RowDrag-0.2.js"></script>
+
+<script src="AnimeShowBorder.js"></script>
+<script src="Group.js"></script>
+<script src="KeyValue.js"></script>
+<script src="XYLine.js"></script>
+<script src="XYClient.js"></script>
+<script src="XYLineHead.js"></script>
+<script src="XYTM.js"></script>
+<script src="XYTable.js"></script>
+<script src="Meta.js"></script>
+<script src="Rule.js"></script>
+<script src="Ids.js"></script>
+<script src="MyEvent.js"></script>
+<script src="EventElement.js"></script>
+<script src="EventProcess.js"></script>
+<script src="Unit.js"></script>
+<script src="CellEditor.js"></script>
+<script src="Palette.js"></script>
+
+<script src="Keyboard.js"></script>
+<script src="TestKeys.js"></script>
+<script src="Link.js"></script>
+<script src="Begun.js"></script>
+<script src="EventMouseDrag.js"></script>
+<script src="Mouse.js"></script>
+<script src="EventStyles.js"></script>
+<script src="UnitMoving.js"></script>
+<script src="EventInterface.js"></script>
+<script src="Folder.js"></script>
+<script src="Config.js"></script>
+<script src="EventPanels.js"></script>
+<script src="Panels.js"></script>
+
+
+<div id=MANUAL_LOAD style="display:none"
+>#id,#action,Price,Qty
+1,,,999
+3,NewOrderSingle,99,1000
+5,ExecutionReport,98,1002
+6,,,
+</div>
+
+<script>
+	space.ready();
+	Ids.space = space;
+	space.path["root"] = "D:\\Downloads\\zxcv\\comma\\BIT_Test Library_20121022";
+	space.path["root-cfg"] = "D:\\Projects\\ClearWater\\CW_0.2\\CW\\site\\cfg";
+	space.path["dic"] = "D:\\Projects\\ClearWater\\CW_0.2\\CW\\site\\cfg\\dic.csv";
+	space.path["gov"] = "D:\\Projects\\ClearWater\\CW_0.2\\CW\\site\\cfg\\loc.csv";
+	space.path["gov2"] = "D:\\Projects\\ClearWater\\CW_0.2\\CW\\site\\cfg\\OFF_BOOK_validation.csv";
+	space.path["groups"] = "D:\\Projects\\ClearWater\\CW_0.2\\CW\\site\\cfg\\palette.csv";
+
+	var book = space.createDic();
+
+	var palTransfer = space.createGov( space.path["root-cfg"] + "\\transfer.csv" );
+	space.addPalette( palTransfer, "transfer" );
+
+	var date = +new Date();
+	var gov = space.createGov( space.getConfig("lastGov") || space.path["gov2"] );
+	space.show( gov );
+	console.log(+new Date() - date);
+
+	// palette book
+	space.addPalette( book, "book" );
+	// palette custum
+	var pal = space.createGov( space.path["groups"] );
+	space.addPalette( pal, "groups", true );
+
+</script>
+
+</body>
+</html>

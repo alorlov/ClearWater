@@ -1,0 +1,77 @@
+<html>
+<head>
+
+<style>
+
+body {
+  margin: 0;
+  padding: 0;
+
+  overflow-y: hidden;
+  overflow-x: hidden;
+  
+  font-size: 15px;
+}
+
+footer, section, header { border: 1px solid #ccc }
+
+footer {
+  height: 200px;
+}
+.block {
+  position: relative;
+  width: 70px;
+  height: 100%;
+  float: left;
+}
+
+.block header { 
+  position: absolute;
+  height: 15px;
+  width: 100%;
+ }
+footer #title {
+  width: 100px;
+}
+.block .group {
+  margin-left: 15px;
+}
+.block .title { top: 0; font-weight: bold }
+.Side { top: 20px; }
+.NoPartyIDs { top: 40px; }
+.PartyID { top: 60px; }
+.PartySource { top: 80px; }
+.PartyRole { top: 100px; }
+
+</style>
+
+</head>
+ 
+<body>
+
+<footer>
+
+  <section class=block id=title>
+    <header class=title>NoSides</header>
+    <header class=Side>Side</header>
+    <header class=NoPartyIDs>NoPartyIDs</header>
+    <section class=group>
+      <header class=PartyID>PartyID</header>
+      <header class=PartyRole>PartyRole</header>
+      <header class=PartySource>PartySource</header>
+    </section>
+  </section>
+  
+  <section class=block id=NoPartyID1>
+    <header class=title>[1]</header>
+    <header class=NoPartyIDs>[1], [2]</header>
+    <header class=PartyID>FIX_123</header>
+    <header class=Side>Sell</header>
+  </section>
+</footer>
+
+</body>
+ 
+</html>
+
+
