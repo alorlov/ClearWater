@@ -212,7 +212,11 @@ drivers.request = {
 		request.send(JSON.stringify(body));
 
 		if (request.status === 200) {
-		  return request.responseText
+			let res = request.responseText
+			if (res.startsWith('ERROR'))
+				console.log(res);
+			else
+		  	return res
 		}
 	},
 
@@ -228,7 +232,6 @@ drivers.request = {
 
 		if (request.status !== 200) throw ("Cannot on readdir fetching. " + err)
 
-		console.log(request.responseText);
 		var list = JSON.parse(request.responseText)
 		for (var i=0, len=list.length; i<len; i++) {
 			var value = list[i]
@@ -238,9 +241,19 @@ drivers.request = {
 			else
 				array.files.push(value)
 		}
-
 		return array;
-	}
+	},
+
+	saveFile: function(path, content) {
+		var body = {path, content}
+		request.open('POST', '/api/savefile', false);
+		request.setRequestHeader('Content-Type', 'application/json')
+		request.send(JSON.stringify(body));
+
+		if (request.status !== 200) throw ("Cannot on savefile. " + err)
+
+		return null;
+	},
 }
 // const libPath = '../../BIT_Test Library_20121022_original'
 // console.log(drivers.request.readDir('../../BIT_Test Library_20121022_original'))

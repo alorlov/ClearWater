@@ -68,7 +68,7 @@
 	<div id="_folder" data-panel="Pfolder">
 
 		<section id="files">
-			<header id=FFolder data-root="../../">BIT_Test Library_20121022_original</header>
+			<header id=FFolder data-root="../..">BIT_Test Library_20121022_original</header>
 		</section>
 	</div>
 
@@ -206,7 +206,7 @@
 	space.addPalette( palTransfer, "transfer" );
 
 	var date = +new Date();
-	var gov = space.createGov( space.path["root"] + '/' + space.getConfig("lastGov").trim() || space.path["gov2"] );
+	var gov = space.createGov(space.getConfig("lastGov").trim() || space.path["gov2"]);
 	space.show( gov );
 	console.log(+new Date() - date);
 
