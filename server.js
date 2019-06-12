@@ -10,10 +10,26 @@ app.get('/submit2', (req, res) => {
   console.log(req.body);
   res.send('Got ' + req.body)
 })
-app.post('/submit', (req, res) => {
+app.post('/api/loadfile', (req, res) => {
   let path = req.body.path
-  let data = readDir(path)
-  res.send(data)
+  let data = loadFile(path)
+  .then(data => {
+    res.send(data)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+})
+
+app.post('/api/readdir', (req, res) => {
+  let path = req.body.path
+  readDir(path)
+  .then(data => {
+    res.send(data)
+  })
+  .catch(err => {
+    console.log(err);
+  })
 })
 
 var server = app.listen(5000, () => {
@@ -22,14 +38,27 @@ var server = app.listen(5000, () => {
 
 var fs = require('fs')
 
-function load(filePath) {
-  return fs.readFileSync('./public/' + filePath)
+function loadFile(path) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, (err, file) => {
+      if (err) reject("Error on file reading " + err)
+      resolve(file)
+    })
+  })
 }
 
 function readDir(path) {
-  fs.readdir(path, (err, files) => {
-    if err throw Error("Error on dir reading " + err)
-
-    return files
+  return new Promise((resolve, reject) => {
+    fs.readdir(path, (err, files) => {
+      if (err) reject("Error on dir reading " + err)
+      resolve(files)
+    })
   })
 }
+
+// loadFile(process.argv[2]).then(data => {
+//   console.log(data);
+// })
+// .catch(err => {
+//   console.log(err);
+// })

@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="CSS.css" />
 <style></style>
 <script src="jquery-1.8.3.js"></script>
-<script src="js/bundle.js"></script>
+<!-- <script src="js/bundle.js"></script> -->
 <script>
 // request.post('http://localhost:5000/submit', {form: {key: 'val'}}, function (error, response, body) {
 // 	console.error('error:', error); // Print the error if one occurred
@@ -68,7 +68,7 @@
 	<div id="_folder" data-panel="Pfolder">
 
 		<section id="files">
-			<header id=FFolder data-root="file:///D:/Downloads/zxcv/comma">BIT_Test Library_20121022</header>
+			<header id=FFolder data-root="../../">BIT_Test Library_20121022_original</header>
 		</section>
 	</div>
 
@@ -111,7 +111,16 @@
 		var regular = /^\${([^\:]+):([^\:]+)}$/;
 		var regular2 = /^\${([^\:]+)}$/;
 
-		var space = new Space();
+		var sitePath = "public"
+		var space = new Space(sitePath);
+
+		var libPath = "../../BIT_Test Library_20121022_original"
+		space.path["root"] = libPath;
+		space.path["root-cfg"] = "public/cfg";
+		space.path["dic"] = space.path["root-cfg"] + "\\dic.csv";
+		space.path["gov"] = space.path["root-cfg"] + "\\loc.csv";
+		space.path["gov2"] = space.path["root-cfg"] + "\\OFF_BOOK_validation.csv";
+		space.path["groups"] = space.path["root-cfg"] + "\\palette.csv";
 	</script>
 
 <script src="Timing.js"></script>
@@ -190,12 +199,6 @@
 <script>
 	space.ready();
 	Ids.space = space;
-	space.path["root"] = "D:\\Downloads\\zxcv\\comma\\BIT_Test Library_20121022";
-	space.path["root-cfg"] = "D:\\Projects\\ClearWater\\CW_0.2\\CW\\site\\cfg";
-	space.path["dic"] = "D:\\Projects\\ClearWater\\CW_0.2\\CW\\site\\cfg\\dic.csv";
-	space.path["gov"] = "D:\\Projects\\ClearWater\\CW_0.2\\CW\\site\\cfg\\loc.csv";
-	space.path["gov2"] = "D:\\Projects\\ClearWater\\CW_0.2\\CW\\site\\cfg\\OFF_BOOK_validation.csv";
-	space.path["groups"] = "D:\\Projects\\ClearWater\\CW_0.2\\CW\\site\\cfg\\palette.csv";
 
 	var book = space.createDic();
 
@@ -203,7 +206,7 @@
 	space.addPalette( palTransfer, "transfer" );
 
 	var date = +new Date();
-	var gov = space.createGov( space.getConfig("lastGov") || space.path["gov2"] );
+	var gov = space.createGov( space.path["root"] + '/' + space.getConfig("lastGov").trim() || space.path["gov2"] );
 	space.show( gov );
 	console.log(+new Date() - date);
 

@@ -110,7 +110,7 @@ var FileSystem = {
 	currentDriver: null,
 	regFile : /([^\\]+)$/,
 	regDir : /([^\\]+)\\$/,
-	driverList: ["manual", "mozilla", "applet", "javaLiveConnect", "activeX"],
+	driverList: ["request", "manual", "mozilla", "applet", "javaLiveConnect", "activeX"],
 
 	// Loads the contents of a text file from the local file system
 	// filePath is the path to the file in these formats:
@@ -180,7 +180,7 @@ var FileSystem = {
 
 	// Returns a reference to the current driver
 	getDriver: function() {
-		return drivers["manual"]
+		return drivers["request"]
 		if(this.currentDriver === null) {
 			for(var t=0; t<this.driverList.length; t++) {
 				if(this.currentDriver === null && drivers[this.driverList[t]].isAvailable && drivers[this.driverList[t]].isAvailable())
@@ -202,21 +202,49 @@ drivers.request = {
 	name: "request",
 	rowsSep: "\r\n",
 	isAvailable: function() {
-		return FILE_MANUAL;
+		return request.readyState >= 0
 	},
-	loadFile: (filePath) => {
-		var body = {filePath}
-		console.log('state', request.readyState);
-		request.open('POST', '/submit', false);
+
+	loadFile: (path) => {
+		var body = {path}
+		request.open('POST', '/api/loadfile', false);
 		request.setRequestHeader('Content-Type', 'application/json')
 		request.send(JSON.stringify(body));
 
 		if (request.status === 200) {
 		  return request.responseText
 		}
+	},
+
+	readDir: function(path) {
+		var array = {
+			files : [],
+			dirs : [],
+		}
+		var body = {path}
+		request.open('POST', '/api/readdir', false);
+		request.setRequestHeader('Content-Type', 'application/json')
+		request.send(JSON.stringify(body));
+
+		if (request.status !== 200) throw ("Cannot on readdir fetching. " + err)
+
+		console.log(request.responseText);
+		var list = JSON.parse(request.responseText)
+		for (var i=0, len=list.length; i<len; i++) {
+			var value = list[i]
+
+			if (value.indexOf('.') == -1)
+				array.dirs.push(value)
+			else
+				array.files.push(value)
+		}
+
+		return array;
 	}
 }
-console.log(drivers.request.loadFile('ab/cd'));
+// const libPath = '../../BIT_Test Library_20121022_original'
+// console.log(drivers.request.readDir('../../BIT_Test Library_20121022_original'))
+// console.log(drivers.request.loadFile(libPath + '/ETF_TS1_FIX_CINA.csv'));
 // Manual functions
 
 drivers.manual = {

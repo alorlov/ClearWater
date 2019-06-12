@@ -1,5 +1,5 @@
 var Matrix = function(fileName, gov) {
-	
+
 	this.gov = gov;
 	this.meta = new Meta( this.gov );
 	this.kv;
@@ -19,7 +19,7 @@ var Matrix = function(fileName, gov) {
 	this.citiesCol = []; // array of city's cols
 	this.sep = ",";
 	this.filename = fileName;
-	
+
 	String.prototype.splitCSV = function(sep) {
 	  for (var foo = this.split(sep = sep || ","), x = foo.length - 1, tl; x >= 0; x--) {
 		if (foo[x].replace(/"\s+$/, '"').charAt(foo[x].length - 1) == '"') {
@@ -31,7 +31,7 @@ var Matrix = function(fileName, gov) {
 		} else foo[x].replace(/""/g, '"');
 	  } return foo;
 	};
-	
+
 	// read matrix in multi-array
 	fileName = FileSystem.convertUriToLocalPath(fileName);
 	//this.matrix = FileSystem.load(fileName).split("\r\n");
@@ -42,40 +42,40 @@ var Matrix = function(fileName, gov) {
 		data = FileSystem.load(fileName);
 	}
 	this.matrix = data.split("\n");
-	
+
 	// split all rows at the time!
 	for (var i=this.matrix.length; i--; ) {
 		this.matrix[i] = this.matrix[i].splitCSV(this.sep);
 	}
-	
+
 	// parse meta
 	var meta = this.findMeta( this.matrix );
 	if ( meta.length ) {
 		var r = meta[0],
 			c = meta[1],
 			metaStr = this.matrix[r][c];
-		
+
 		this.meta.parseMeta( metaStr );
 		// clear row with meta
 		this.matrix.splice(r, 1);
 	}
-	
+
 	this.header = this.matrix[0];
 	this.kv = new KeyValue( this.header );
-	
+
 	this.cases[0] = { 0:1, 1: this.matrix.length - 1 }
-	
+
 	/*
 	// create naction's collection
-	for (var r=1, 
-				a = this.kv.getI( "#action" ), 
+	for (var r=1,
+				a = this.kv.getI( "#action" ),
 				action,
 				tc=0,
-				len=this.matrix.length; 
-						r < len; r++) 
+				len=this.matrix.length;
+						r < len; r++)
 	{
 		action = this.matrix[r][a];
-		
+
 		// create test case's start/end positions
 		if (action == "test case start") { this.cases[tc] = []; this.cases[tc][0] = r; }
 		if (action == "test case end") { this.cases[tc][1] = r; tc++; }
@@ -83,7 +83,7 @@ var Matrix = function(fileName, gov) {
 }
 
 Matrix.prototype = {
-	
+
 	joinCSV : function (table, replacer) {
 		replacer = replacer || function(r, c, v) { return v; };
 		var csv = '', c, cc, r, rr = table.length, cell;
@@ -98,16 +98,16 @@ Matrix.prototype = {
 		}
 		return csv;
 	},
-	
+
 	getFilename: function() {
 		var ind = this.filename.lastIndexOf("\\");
 		return this.filename.substr(ind + 1);
 	},
-	
+
 	count : function() {
 		return this.cases.length;
 	},
-		
+
 	findMeta: function( matrix ) {
 		var reg = /^META/;
 		for ( var r = matrix.length, len = r-3; r>len; r-- ) {
@@ -123,38 +123,38 @@ Matrix.prototype = {
 		}
 		return [];
 	},
-	
+
 	save : function() {
 		// index = name
 		var headers = this.kv.setIndexes( this.header ),
 			metaI = this.header.length,
 			idsField = this.kv.getI( "#id" );
-		
+
 		if ( idsField === undefined ) {
 			idsField = this.header.push( "#id" ) - 1;
 			headers[name] = idsField;
 		}
-		
+
 		var r = 0,
 			bookers = this.gov.sectB.list(),
 			matrix = [];
 
 		matrix[r++] = this.header; // first row
-		
+
 		for (var b in bookers) {
 			var booker = bookers[b];
 			// Managers
 			var managers = booker.sections.list();
-			
+
 			for (var i=0, len=managers.length; i<len; i++) {
 				var m = managers[i],
 					row = m.out();
-				
+
 				if ( m.isGroup() ) {
 					continue;
 				}
 				matrix[r] = [];
-				
+
 				for ( var name in row ) {
 					var index = headers[name];
 					// if new tag in the matrix
@@ -165,50 +165,50 @@ Matrix.prototype = {
 					var value = row[name];
 					matrix[r][index] = value;
 				}
-				
+
 				matrix[r][idsField] = i;
 				r++;
 			}
 		}
 		matrix[r] = [];
 		matrix[r][metaI] = this.meta.genAll();
-		
+
 		var out = this.joinCSV(matrix);
 		FileSystem.save( this.filename, out );
 		//FileSystem.save(this.filename+ +new Date(), matrix);
 		return out;
 	},
-	
-	parse: function( booker ) 
+
+	parse: function( booker )
 	{
 		var caseId = booker.caseId,
 			ids = this.meta.ids,
 			localStyles = this.meta.localStyles,
 			ownStyles = this.meta.ownStyles,
-			
+
 			tcStart = this.cases[caseId][0],
 			tcEnd = this.cases[caseId][1],
-			
+
 			rule = this.gov.rule,
 			book = this.gov.book,
 			t = this.gov.style,
-			
+
 			references = [],
 			refChanged = [],
-			
+
 			tms = []; //this.gov.tmanagers;
 
-		for (var r=tcStart; r < tcEnd; r++) {
+		for (var r=tcStart; r <= tcEnd; r++) {
 			var row = this.matrix[r], ruleW, localStyle, confirmRule, w;
 			// get row
 			this.kv.setValues( row );
 			var metaId = this.kv.getValue( "#id" );
 			var ref = this.kv.getValue( "#reference" );
-			
+
 			man = booker.addM( ref );
 			// update ref-array
 			references[ref] = man;
-			
+
 			// add matrix id for Meta-purposes
 			ids[ metaId ] = man;
 			// Add workers
@@ -237,12 +237,12 @@ Matrix.prototype = {
 				refChanged[i].refreshReference();
 			}
 		}
-		
+
 		// parse groups
 		if ( this.meta.params["GValues"] ) {
 			this.meta.groups = this.meta.parseGValues( this.meta.params["GValues"], booker );
 		}
-		// insert groups	
+		// insert groups
 		var groups = this.meta.groups,
 			rule = this.gov.ruleG;
 		for ( var i=1, len=groups.length; i<len; i++ ) { // skip group[0] (global parent)
@@ -260,13 +260,13 @@ Matrix.prototype = {
 			// add matrix ids
 			ids[g.a] = man1;
 			ids[g.b] = man2;
-			
+
 			// add Workers
 			for ( var name in cities ) {
 				man1.addWorker( cities[name], name );
 			}
 			g.setParent( groups[g.parentI] ).recreate( man1, man2 );
-			
+
 			// Get rule for the first manager
 			this.kv.setKeyValues( cities );
 			// get best rule
@@ -276,7 +276,7 @@ Matrix.prototype = {
 			// update color by level
 			g.setColor();
 		}
-		
+
 		// parse links
 		if ( this.meta.params["Links"] ) {
 			this.meta.parseLinks( this.meta.params["Links"] );
