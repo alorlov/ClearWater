@@ -6,9 +6,9 @@ body {
 
 	//overflow-y: hidden;
 	overflow-x: hidden;
-	
+
 	// background: color position size repeat origin clip attachment image;
-	
+
 	background-color: #666;
 	cursor: default;
 }
@@ -22,7 +22,7 @@ a {
 	color: red;
 }
 
-input { 
+input {
 	cursor: text;
 }
 textarea:focus, input:focus{
@@ -136,7 +136,7 @@ section article nav {
 	//margin-bottom: 4px;
 	//background: url(i/bg-line-white.gif) top repeat-x,
 				//url(i/bg-row.gif) 0px 15px repeat-x #fff;
-				//url(i/bg-line-white.gif) bottom repeat-x; 
+				//url(i/bg-line-white.gif) bottom repeat-x;
 	//-webkit-box-shadow: -7px 3px 15px 0px rgba(100,100,100, .9);
 	-webkit-border-radius: 5px 0 0 5px;
 	border: 1px solid #fff;
@@ -157,7 +157,7 @@ nav.group {
 	//margin-bottom: 5px;
 	height: 10px;
 	background: none;
-	
+
 	//-webkit-box-shadow: -7px 0px 15px 0px rgba(200,200,200, .9);
 }
 .group + .group {
@@ -210,7 +210,7 @@ div.link {
 section nav:nth-child(even) {
 	//color: #666;
 	//opacity: 0.8;
-		
+
 }
 section nav:nth-child(even)  .lineHead {
 	//background: #ddd;
@@ -270,7 +270,7 @@ nav > div.line {
 	width: 3px;
 	height: 95%;
 	opacity: 0.7;
-	
+
 	border: 1px solid rgba(255,255,255, 0.3);
 	border-width: 1px 1px 1px 1px;
 	//border-width: 0;
@@ -316,14 +316,17 @@ nav > aside {
 aside > aside {
 	width: 100%;
 	// background: color position size repeat origin clip attachment image;
-	background: 	url(i/bg-line-v.gif) repeat-y, url(i/bg7.gif); /*url(i/bg-line.gif) top repeat-x*/				
+	background: 	url(i/bg-line-v.gif) repeat-y, url(i/bg7trans.gif); /*url(i/bg-line.gif) top repeat-x*/
 }
 aside > aside:hover {
-	//background: 	url(i/bg7.gif);
+	/* background: 	url(i/bg7g.gif); */
+}
+aside > aside.s1 {
+	background: 	url(i/bg7g.gif);
 }
 nav.group aside > aside {
 	background: 	url(i/bg-line-vg.gif) repeat-y, url(i/bg7g.gif);
-					
+
 }
 .buls {
 	color: #fff;
@@ -472,7 +475,7 @@ nav.group aside > aside {
 	margin: 0;
 }
 
-#iName { 
+#iName {
 	margin-left: 10px;
 	margin-right: 5px;
 	font-size: 12px;
@@ -563,7 +566,7 @@ nav.group aside > aside {
 	width: 90%;
 	height: 80%;
 	overflow: scroll;
-	
+
 	background: #ccc;
 }
 /* lineHeads stick */
